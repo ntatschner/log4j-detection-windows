@@ -30,8 +30,8 @@ if ($(Test-Path -Path $detectionSuccessFullPath) -or $(Test-Path -Path $detectio
 
 $properties = @{
     FileName = "";
-    Path = "N/A";
-    Version = "N/A"
+    Path     = "N/A";
+    Version  = "N/A"
 }
 # Main loop, searches each logical drive for defined file types and outputs to share
 foreach ($drive in $localDrives) {
@@ -44,20 +44,21 @@ foreach ($drive in $localDrives) {
             $result = $file | Select-String -SimpleMatch $searchPatten
             if ($result) {
                 $script:detection = $true
-                $obj = New-Object -TypeName psobject -Property $Properties
+                $obj = New-Object -TypeName psobject -Property $properties
                 $obj.FileName = $file.Name
                 $Obj.Path = $file.FullName
                 $obj.Version = $file.VersionInfo
                 $obj | Export-Csv -Path $detectionSuccessFullPath -NoTypeInformation -Append
-            }
-            if ($detection -eq $false) {
-                $obj = New-Object -TypeName psobject -Property $properties
-                $obj.FileName = "Nothing Found - Log4j2 not detected"
-
-                $obj | Export-Csv -Path $detectionNegativeFullPath -NoTypeInformation
-            }            
+            }           
         }
-    } else {
+        if ($detection -eq $false) {
+            $obj = New-Object -TypeName psobject -Property $properties
+            $obj.FileName = "Nothing Found - Log4j2 not detected"
+
+            $obj | Export-Csv -Path $detectionNegativeFullPath -NoTypeInformation
+        } 
+    }
+    else {
         $obj = New-Object -TypeName psobject -Property $properties
         $obj.FileName = "Nothing Found - No Jar Files"
         $obj | Export-Csv -Path $detectionNegativeFullPath -NoTypeInformation
