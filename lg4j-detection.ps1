@@ -14,7 +14,7 @@ $detectionNegativeFullPath = Join-Path -Path $detectionNegativeFolderPath -Child
 
 $searchPatten = "JndiLookup.class"
 # Finds all logical drives to search 
-$localDrives = Get-WMIObject -Class win32_locicaldisk | Where-Object -Property DriveType -eq 3 | Select-Object DeviceID
+$localDrives = Get-WMIObject -Class win32_logicaldisk | Where-Object -Property DriveType -eq 3 | Select-Object DeviceID
 # Fild type to search
 $typesToSearch = "*.jar", "*.war"
 
