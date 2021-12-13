@@ -47,7 +47,7 @@ foreach ($drive in $localDrives) {
                 $obj = New-Object -TypeName psobject -Property $properties
                 $obj.FileName = $file.Name
                 $Obj.Path = $file.FullName
-                $obj.Version = $file.VersionInfo
+                $obj.Version = $file.VersionInfo.FileVersion
                 $obj | Export-Csv -Path $detectionSuccessFullPath -NoTypeInformation -Append
             }           
         }
