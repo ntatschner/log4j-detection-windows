@@ -44,7 +44,7 @@ foreach ($drive in $localDrives) {
             $result = $file | Select-String -SimpleMatch $searchPatten
             if ($result) {
                 $script:detection = $true
-                $obj = New-Object -TypeName psobject -Property
+                $obj = New-Object -TypeName psobject -Property $Properties
                 $obj.FileName = $file.Name
                 $Obj.Path = $file.FullName
                 $obj.Version = $file.VersionInfo
