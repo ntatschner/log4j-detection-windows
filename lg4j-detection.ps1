@@ -36,7 +36,7 @@ $properties = @{
 # Main loop, searches each logical drive for defined file types and outputs to share
 foreach ($drive in $localDrives) {
     Write-Warning -Message "Checking Drive $($drive)"
-    $searchFiles = Get-ChildItem -Force -Recurse -Path "$($driveDeviceID)\" -Include $typesToSearch -ErrorAction SilentlyContinue
+    $searchFiles = Get-ChildItem -Force -Recurse -Path "$($drive.DeviceID)\" -Include $typesToSearch -ErrorAction SilentlyContinue
 
     if ($searchFiles.count -gt 0) {
         $detection = $false
