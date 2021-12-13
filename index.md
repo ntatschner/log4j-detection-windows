@@ -10,6 +10,16 @@ Ensure the appropriate permissions for the folders have been set.
 
 Update the script in the vars section to the path you created above.
 
+#### Deployment Options
+
+You can deploy this via GPO, running as either a scheduled task or Start Up script.
+
+The script will only run once on each system if running via a GPO.
+
+You could also run this Ad-hoc via PSRemoting. 
+
+Make sure the central logging is set up and the account running the command has permissions to the share.
+
 ```markdown
 # First we test the storage location for the results file, there will be 2 directories, 
 # one for a positive detection and one for negitive detection, I do this so the "scan" will only run once when deployed via group policy
@@ -77,5 +87,10 @@ foreach ($drive in $localDrives) {
         $obj | Export-Csv -Path $detectionNegativeFullPath -NoTypeInformation
     }
 }
-[Link](url) and ![Image](src)
 ```
+Make sure to check the link for updaters to the script. 
+[GitHub Source File](https://github.com/ntatschner/log4j-detection-windows)
+
+I hope this helps someone!
+
+Nigel Tatschner 
