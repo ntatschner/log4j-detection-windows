@@ -22,7 +22,7 @@ $typesToSearch = "*.jar", "*.war"
 
 # Break if file exists in either negative or positive folder
 
-if ($(Test-Path -Path $detectionSuccessFullPath) -or $($detectionNegativeFullPath)) {
+if ($(Test-Path -Path $detectionSuccessFullPath) -or $(Test-Path -Path $detectionNegativeFullPath)) {
     break
 }
 
